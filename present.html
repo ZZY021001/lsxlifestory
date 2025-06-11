@@ -1,0 +1,399 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>晚年札记</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: 'Microsoft YaHei', sans-serif;
+            padding-bottom: 40px;
+        }
+
+        .header {
+            background: #ff8e53;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .intro {
+            max-width: 1000px;
+            margin: 0 auto 50px;
+            text-align: center;
+            padding: 0 40px;
+            line-height: 1.8;
+        }
+        .gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3列 */
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .grid-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background: white;
+            cursor: pointer;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .caption {
+            padding: 12px;
+            text-align: center;
+            background: white;
+            font-size: 0.95rem;
+        }
+
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lightbox.show {
+            opacity: 1;
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+        }
+
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 15px;
+            max-width: 800px;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+
+        .close-lightbox:hover {
+            opacity: 1;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            opacity: 0.8;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            opacity: 1;
+        }
+
+        .prev-btn {
+            left: 20px;
+        }
+
+        .next-btn {
+            right: 20px;
+        }
+
+        .continue-btn {
+            display: block;
+            margin: 40px auto;
+            padding: 12px 40px;
+            background: #ff8e53;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 142, 83, 0.3);
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 142, 83, 0.4);
+            background: #ff7b40;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <h1><i class="fas fa-images"></i> 花开堪折直须折</h1>
+    </div>
+</div>
+
+<div class="intro">
+    <h2>您已经浏览完了这位老人平凡又波澜的一生</h2>
+    <p>胜仙和《活着》中的福贵很像，是那种能够看到自己过去模样的人:看到自己年轻时走路的姿态，看到孩子从牙牙学语到成家立业，甚至可以看到自己是如何衰老的。困苦的生活并没有损坏她的记忆，因此更为痛苦</p>
+    <p>不知这到底是上天恩赐还是惩罚，她的记忆实在是可恶的耐磨，和着阳光和泥土刻进皱纹里，不断剐蹭着皮肉。</p>
+    <p>请您不要为了胜仙的故事而伤怀或者落泪，胜仙不希望您为她而难过。</p>
+    <p>人生百年不过俯仰之间，总有一些珍贵的闪光点、可爱的人儿留住我们。</p>
+    <p>来看看今年75岁的她过着怎样的生活吧！</p>
+</div>
+
+<div class="gallery">
+    <div class="grid-container">
+        <div class="grid-item" onclick="openLightbox(0)">
+            <img src="<c:url value='/pic/1.png'/>" alt="图片1">
+            <div class="caption">
+                和老姐妹打牌
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(1)">
+            <img src="<c:url value='/pic/2.png'/>" alt="图片2">
+            <div class="caption">
+                拍立得照相
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(2)">
+            <img src="<c:url value='/pic/3.png'/>" alt="图片3">
+            <div class="caption">
+                打理小菜园
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(3)">
+            <img src="<c:url value='/pic/4.png'/>" alt="图片4">
+            <div class="caption">
+                逗小狗欢欢
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(4)">
+            <img src="<c:url value='/pic/5.png'/>" alt="图片5">
+            <div class="caption">
+                做大餐
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(5)">
+            <img src="<c:url value='/pic/6.png'/>" alt="图片6">
+            <div class="caption">
+                养小猫花花和淘淘
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(6)">
+            <img src="<c:url value='/pic/7.png'/>" alt="图片7">
+            <div class="caption">
+                骑小车兜风
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(7)">
+            <img src="<c:url value='/pic/8.png'/>" alt="图片8">
+            <div class="caption">
+                给小猫咪咪洗澡
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(8)">
+            <img src="<c:url value='/pic/9.png'/>" alt="图片9">
+            <div class="caption">
+                吃披萨
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(9)">
+            <img src="<c:url value='/pic/10.png'/>" alt="图片10">
+            <div class="caption">
+                去部队看孙子
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(10)">
+            <img src="<c:url value='/pic/11.png'/>" alt="图片11">
+            <div class="caption">
+                在秦皇岛海边
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(11)">
+            <img src="<c:url value='/pic/12.png'/>" alt="图片12">
+            <div class="caption">
+                在秦皇岛鸽子窝公园
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(12)">
+            <img src="<c:url value='/pic/13.png'/>" alt="图片13">
+            <div class="caption">
+                在沈阳老北市
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(13)">
+            <img src="<c:url value='/pic/14.png'/>" alt="图片14">
+            <div class="caption">
+                在沈阳吃铁锅炖
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(14)">
+            <img src="<c:url value='/pic/15.png'/>" alt="图片15">
+            <div class="caption">
+                在沈阳洗浴中心
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(15)">
+            <img src="<c:url value='/pic/16.png'/>" alt="图片16">
+            <div class="caption">
+                在沈阳机场候机
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(16)">
+            <img src="<c:url value='/pic/17.png'/>" alt="图片17">
+            <div class="caption">
+                第一次坐飞机
+            </div>
+        </div>
+        <div class="grid-item" onclick="openLightbox(17)">
+            <img src="<c:url value='/pic/18.png'/>" alt="图片18">
+            <div class="caption">
+                吃沈阳鸡架
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="continue-btn" onclick="location.href='comments.html'">
+    继续浏览留言板 <i class="fas fa-arrow-right ms-2"></i>
+</button>
+
+<div class="lightbox" id="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <div class="nav-btn prev-btn" onclick="changeImage(-1)">&#10094;</div>
+    <div class="lightbox-content">
+        <img src="" alt="" id="lightboxImage">
+        <div class="lightbox-caption">
+            <h3 id="lightboxTitle"></h3>
+        </div>
+    </div>
+    <div class="nav-btn next-btn" onclick="changeImage(1)">&#10095;</div>
+</div>
+
+<script>
+    // 手动指定的图片列表
+    const photos = [
+        {src: "<c:url value='/pic/1.png'/>", title: "和老姐妹打牌"},
+        {src: "<c:url value='/pic/2.png'/>", title: "拍立得照相"},
+        {src: "<c:url value='/pic/3.png'/>", title: "打理小菜园"},
+        {src: "<c:url value='/pic/4.png'/>", title: "逗小狗欢欢"},
+        {src: "<c:url value='/pic/5.png'/>", title: "做大餐"},
+        {src: "<c:url value='/pic/6.png'/>", title: "养小猫花花和淘淘"},
+        {src: "<c:url value='/pic/7.png'/>", title: "骑小车兜风"},
+        {src: "<c:url value='/pic/8.png'/>", title: "给小猫咪咪洗澡"},
+        {src: "<c:url value='/pic/9.png'/>", title: "吃披萨"},
+        {src: "<c:url value='/pic/10.png'/>", title:"去部队看孙子"},
+        {src: "<c:url value='/pic/11.png'/>", title: "在秦皇岛海边"},
+        {src: "<c:url value='/pic/12.png'/>", title: "在秦皇岛鸽子窝公园"},
+        {src: "<c:url value='/pic/13.png'/>", title: "在沈阳老北市"},
+        {src: "<c:url value='/pic/14.png'/>", title: "在沈阳吃铁锅炖"},
+        {src: "<c:url value='/pic/15.png'/>", title: "在沈阳洗浴中心"},
+        {src: "<c:url value='/pic/16.png'/>", title: "在沈阳机场候机"},
+        {src: "<c:url value='/pic/17.png'/>", title: "第一次坐飞机"},
+        {src: "<c:url value='/pic/18.png'/>", title: "吃沈阳鸡架"}
+    ];
+
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+        currentIndex = index;
+        updateLightbox();
+        document.getElementById('lightbox').classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+
+    function changeImage(direction) {
+        currentIndex += direction;
+        if (currentIndex >= photos.length) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = photos.length - 1;
+        updateLightbox();
+    }
+
+    function updateLightbox() {
+        const photo = photos[currentIndex];
+        document.getElementById('lightboxImage').src = photo.src;
+        document.getElementById('lightboxTitle').textContent = photo.title;
+    }
+
+    // 键盘导航
+    document.addEventListener('keydown', function(e) {
+        if (document.getElementById('lightbox').classList.contains('show')) {
+            if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            } else if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        }
+    });
+
+    // 点击背景关闭灯箱
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeLightbox();
+        }
+    });
+</script>
+</body>
+</html>
