@@ -1,5 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -198,110 +196,108 @@
 
 <div class="gallery">
     <div class="grid-container">
-        <div class="grid-item" onclick="openLightbox(0)">
-            <img src="<c:url value='/pic/1.png'/>" alt="图片1">
-            <div class="caption">
-                和老姐妹打牌
-            </div>
+	<div class="grid-item" onclick="openLightbox(0)">
+            <img src="pic/1.png" alt="和老姐妹打牌">
+            <div class="caption">和老姐妹打牌</div>
         </div>
         <div class="grid-item" onclick="openLightbox(1)">
-            <img src="<c:url value='/pic/2.png'/>" alt="图片2">
+            <img src="pic/2.png" alt="拍立得照相">
             <div class="caption">
                 拍立得照相
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(2)">
-            <img src="<c:url value='/pic/3.png'/>" alt="图片3">
+            <img src="pic/3.png" alt="打理小菜园">
             <div class="caption">
                 打理小菜园
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(3)">
-            <img src="<c:url value='/pic/4.png'/>" alt="图片4">
+            <img src="pic/4.png" alt="逗小狗欢欢">
             <div class="caption">
                 逗小狗欢欢
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(4)">
-            <img src="<c:url value='/pic/5.png'/>" alt="图片5">
+            <img src="pic/5.png" alt="做大餐">
             <div class="caption">
                 做大餐
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(5)">
-            <img src="<c:url value='/pic/6.png'/>" alt="图片6">
+            <img src="pic/6.png" alt="养小猫花花和淘淘">
             <div class="caption">
                 养小猫花花和淘淘
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(6)">
-            <img src="<c:url value='/pic/7.png'/>" alt="图片7">
+            <img src="pic/7.png" alt="骑小车兜风">
             <div class="caption">
                 骑小车兜风
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(7)">
-            <img src="<c:url value='/pic/8.png'/>" alt="图片8">
+            <img src="pic/8.png" alt="给小猫咪咪洗澡">
             <div class="caption">
                 给小猫咪咪洗澡
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(8)">
-            <img src="<c:url value='/pic/9.png'/>" alt="图片9">
+            <img src="pic/9.png" alt="吃披萨">
             <div class="caption">
                 吃披萨
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(9)">
-            <img src="<c:url value='/pic/10.png'/>" alt="图片10">
+            <img src="pic/10.png" alt="去部队看孙子">
             <div class="caption">
                 去部队看孙子
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(10)">
-            <img src="<c:url value='/pic/11.png'/>" alt="图片11">
+            <img src="pic/11.png" alt="在秦皇岛海边">
             <div class="caption">
                 在秦皇岛海边
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(11)">
-            <img src="<c:url value='/pic/12.png'/>" alt="图片12">
+            <img src="pic/12.png" alt="在秦皇岛鸽子窝公园">
             <div class="caption">
                 在秦皇岛鸽子窝公园
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(12)">
-            <img src="<c:url value='/pic/13.png'/>" alt="图片13">
+            <img src="pic/13.png" alt="在沈阳老北市">
             <div class="caption">
                 在沈阳老北市
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(13)">
-            <img src="<c:url value='/pic/14.png'/>" alt="图片14">
+            <img src="pic/14.png" alt="在沈阳吃铁锅炖">
             <div class="caption">
                 在沈阳吃铁锅炖
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(14)">
-            <img src="<c:url value='/pic/15.png'/>" alt="图片15">
+            <img src="pic/15.png" alt="在沈阳洗浴中心">
             <div class="caption">
                 在沈阳洗浴中心
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(15)">
-            <img src="<c:url value='/pic/16.png'/>" alt="图片16">
+            <img src="pic/16.png" alt="在沈阳机场候机">
             <div class="caption">
                 在沈阳机场候机
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(16)">
-            <img src="<c:url value='/pic/17.png'/>" alt="图片17">
+            <img src="pic/17.png" alt="第一次坐飞机">
             <div class="caption">
                 第一次坐飞机
             </div>
         </div>
         <div class="grid-item" onclick="openLightbox(17)">
-            <img src="<c:url value='/pic/18.png'/>" alt="图片18">
+            <img src="pic/18.png" alt="吃沈阳鸡架">
             <div class="caption">
                 吃沈阳鸡架
             </div>
@@ -328,24 +324,24 @@
 <script>
     // 手动指定的图片列表
     const photos = [
-        {src: "<c:url value='/pic/1.png'/>", title: "和老姐妹打牌"},
-        {src: "<c:url value='/pic/2.png'/>", title: "拍立得照相"},
-        {src: "<c:url value='/pic/3.png'/>", title: "打理小菜园"},
-        {src: "<c:url value='/pic/4.png'/>", title: "逗小狗欢欢"},
-        {src: "<c:url value='/pic/5.png'/>", title: "做大餐"},
-        {src: "<c:url value='/pic/6.png'/>", title: "养小猫花花和淘淘"},
-        {src: "<c:url value='/pic/7.png'/>", title: "骑小车兜风"},
-        {src: "<c:url value='/pic/8.png'/>", title: "给小猫咪咪洗澡"},
-        {src: "<c:url value='/pic/9.png'/>", title: "吃披萨"},
-        {src: "<c:url value='/pic/10.png'/>", title:"去部队看孙子"},
-        {src: "<c:url value='/pic/11.png'/>", title: "在秦皇岛海边"},
-        {src: "<c:url value='/pic/12.png'/>", title: "在秦皇岛鸽子窝公园"},
-        {src: "<c:url value='/pic/13.png'/>", title: "在沈阳老北市"},
-        {src: "<c:url value='/pic/14.png'/>", title: "在沈阳吃铁锅炖"},
-        {src: "<c:url value='/pic/15.png'/>", title: "在沈阳洗浴中心"},
-        {src: "<c:url value='/pic/16.png'/>", title: "在沈阳机场候机"},
-        {src: "<c:url value='/pic/17.png'/>", title: "第一次坐飞机"},
-        {src: "<c:url value='/pic/18.png'/>", title: "吃沈阳鸡架"}
+        {src: "pic/1.png", title: "和老姐妹打牌"},
+        {src: "pic/2.png", title: "拍立得照相"},
+        {src: "pic/3.png", title: "打理小菜园"},
+        {src: "pic/4.png", title: "逗小狗欢欢"},
+        {src: "pic/5.png", title: "做大餐"},
+        {src: "pic/6.png", title: "养小猫花花和淘淘"},
+        {src: "pic/7.png", title: "骑小车兜风"},
+        {src: "pic/8.png", title: "给小猫咪咪洗澡"},
+        {src: "pic/9.png", title: "吃披萨"},
+        {src: "pic/10.png", title:"去部队看孙子"},
+        {src: "pic/11.png", title: "在秦皇岛海边"},
+        {src: "pic/12.png", title: "在秦皇岛鸽子窝公园"},
+        {src: "pic/13.png", title: "在沈阳老北市"},
+        {src: "pic/14.png", title: "在沈阳吃铁锅炖"},
+        {src: "pic/15.png", title: "在沈阳洗浴中心"},
+        {src: "pic/16.png", title: "在沈阳机场候机"},
+        {src: "pic/17.png", title: "第一次坐飞机"},
+        {src: "pic/18.png", title: "吃沈阳鸡架"}
     ];
 
     let currentIndex = 0;
